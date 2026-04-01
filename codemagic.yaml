@@ -1,30 +1,11 @@
 workflows:
-  ios-simulator-build:
-    name: WidgetKit Demo Simulator
-    max_build_duration: 60
-    instance_type: mac_mini_m2
-
-    environment:
-      xcode: latest
-
-    scripts:
-      - name: Build app for simulator
-        script: |
-          xcodebuild \
-            -project "WidgetKit Demo.xcodeproj" \
-            -scheme "WidgetKit Demo" \
-            -configuration Debug \
-            -sdk iphonesimulator \
-            build
-
-    artifacts:
-      - ~/Library/Developer/Xcode/DerivedData/**/Build/Products/**/*.app
-      - ~/Library/Developer/Xcode/DerivedData/**/Build/Products/**/*.appex
-
-  ios-ipa-build:
+  ios-release-build:
     name: WidgetKit Demo IPA
     max_build_duration: 60
     instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: codemagic
 
     environment:
       xcode: latest
